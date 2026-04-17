@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
         :root {
             --bg: #000000;
             --text: #f0f0f0;
@@ -26,7 +25,6 @@
             overflow-x: hidden;
             user-select: none;
         }
-
         /* ==================== ULTRA SMOOTH ROTATING MORE SERVICES ==================== */
         .more-services {
             margin-top: 280px;
@@ -39,7 +37,6 @@
             margin-bottom: 100px;
             color: #f5f5f5;
         }
-
         .more-grid {
             position: relative;
             height: 540px;
@@ -48,7 +45,6 @@
             perspective: 1400px;
             overflow: hidden;
         }
-
         .more-card {
             position: absolute;
             left: 50%;
@@ -69,7 +65,6 @@
             transform: translate(-50%, -50%) scale(0.92) translateZ(-60px);
             will-change: transform, opacity;
         }
-
         .more-card.left {
             transform: translate(-105%, -50%) scale(0.88) rotateY(14deg) translateZ(-80px);
             opacity: 0.62;
@@ -90,16 +85,19 @@
             opacity: 0.62;
             z-index: 1;
         }
-
-        /* Mobile fallback - smooth scroll with center highlight */
+        /* ==================== MOBILE FIX - Better Auto Highlight ==================== */
         @media (max-width: 767px) {
             .more-grid {
                 height: auto;
-                padding: 40px 0 80px;
+                padding: 40px 0 100px;
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
                 perspective: none;
+                display: flex;
+                gap: 20px;
+                padding-left: calc(50vw - 170px);
+                padding-right: calc(50vw - 170px);
             }
             .more-card {
                 position: static;
@@ -107,19 +105,19 @@
                 opacity: 1;
                 flex: 0 0 86vw;
                 max-width: 340px;
-                margin: 0 12px;
+                margin: 0;
                 scroll-snap-align: center;
-                transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+                transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
             }
             .more-card.active {
                 flex: 0 0 92vw;
-                transform: scale(1.06) translateZ(40px);
+                transform: scale(1.07) !important;
                 border: 2px solid #8a8a8a;
                 box-shadow: 0 60px 140px -30px rgba(138, 138, 138, 0.45);
+                z-index: 10;
             }
             .more-grid::-webkit-scrollbar { display: none; }
         }
-
         /* ==================== REVIEWS SECTION ==================== */
         .reviews-section {
             margin-top: 140px;
@@ -196,8 +194,6 @@
             font-size: 13px;
             letter-spacing: 2px;
         }
-
-        /* ==================== ORIGINAL STYLES ==================== */
         #book-slot-popup {
             position: fixed;
             background: rgba(15, 15, 22, 0.95);
@@ -227,7 +223,6 @@
             border-color: rgba(255,255,255,0.35);
             transform: scale(1.04);
         }
-
         #loader {
             position: fixed;
             inset: 0;
@@ -260,11 +255,9 @@
         .dot:nth-child(3) { animation-delay: 0.4s; }
         @keyframes subtleShimmer { 0%, 100% { opacity: 0.68; } 50% { opacity: 0.96; } }
         @keyframes dotPulse { 0%, 100% { transform: scale(0.4); opacity: 0.35; } 50% { transform: scale(1.35); opacity: 0.95; } }
-
         .site-content { opacity: 0; transition: opacity 1.2s cubic-bezier(0.23, 1, 0.32, 1); }
         .site-content.loaded { opacity: 1; }
         canvas { image-rendering: pixelated; display: block; }
-
         .hero {
             min-height: 100vh;
             display: flex;
@@ -299,7 +292,6 @@
             line-height: 1.62;
         }
         .subtag strong { color: #d0d0d0; font-weight: 500; }
-
         .game-wrapper {
             position: relative;
             display: inline-block;
@@ -352,7 +344,6 @@
             margin-top: 40px;
         }
         @keyframes gentlePulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 0.95; } }
-
         .content {
             padding: 110px 20px 140px;
             max-width: 780px;
@@ -468,7 +459,6 @@
         .copyright { font-size: 10.5px; color: #3a3a3a; letter-spacing: 1.8px; margin-bottom: 10px; }
         .disclaimer { font-size: 12.2px; color: #444; line-height: 1.55; max-width: 520px; margin: 0 auto 18px; }
         .made-by { font-size: 10.8px; color: #3a3a3a; letter-spacing: 2px; }
-
         .music-toggle {
             position: fixed;
             bottom: 24px;
@@ -486,7 +476,6 @@
             user-select: none;
         }
         .music-toggle:hover { color: #aaa; border-color: #4a4a4a; }
-
         #music-visualizer {
             position: fixed;
             bottom: 0;
@@ -517,7 +506,6 @@
         .bar:nth-child(6) { animation-delay: 0.08s; }
         .bar:nth-child(7) { animation-delay: 0.22s; }
         @keyframes pulse { 0%, 100% { height: 6px; } 50% { height: 30px; } }
-
         @media (max-width: 1024px) {
             .hero { padding: 70px 16px 110px; }
             .content { padding: 90px 16px 120px; }
@@ -528,7 +516,7 @@
         }
     </style>
 </head>
-<body oncontextmenu="showBookSlot(event); return false;">
+<body>
     <!-- Loader -->
     <div id="loader">
         <div class="loader-content">
@@ -540,7 +528,6 @@
             </div>
         </div>
     </div>
-
     <div class="site-content" id="site-content">
         <section class="hero">
             <div class="tagline">DIGITAL ASSET INTELLIGENCE</div>
@@ -562,7 +549,6 @@
                 SCROLL TO EXPLORE <span style="font-size:18px;">↓</span>
             </div>
         </section>
-
         <div class="content">
             <section>
                 <h2>Structure. Control. Precision.</h2>
@@ -594,7 +580,6 @@
                     </div>
                 </div>
             </section>
-
             <section>
                 <div id="methodology" class="methodology" style="filter: blur(18px); opacity: 0.28;">
                     <h2>Communication Strategy &amp; Appeal Architecture</h2>
@@ -623,7 +608,6 @@
                     </div>
                 </div>
             </section>
-
             <section style="text-align: center; padding: 140px 20px 180px; border-top: 1px solid #1a1a1a; margin-top: 80px;">
                 <h2>Professional Guidance.<br>No Ambiguity.</h2>
                 <p style="max-width: 480px; margin: 0 auto 40px; color:#999;">
@@ -633,8 +617,7 @@
                     START CONSULTATION
                 </a>
             </section>
-
-            <!-- More Services with smooth rotation -->
+            <!-- More Services Section -->
             <section class="more-services">
                 <h2>More Services</h2>
                 <div class="more-grid" id="more-grid">
@@ -662,14 +645,12 @@
                     </div>
                 </div>
             </section>
-
             <!-- Reviews -->
             <section class="reviews-section">
                 <h2>Real Results. Real People.</h2>
                 <div class="reviews-container" id="reviews-container"></div>
             </section>
         </div>
-
         <footer class="footer">
             <p class="copyright">Uncasing Advisory © 2026</p>
             <p class="disclaimer">
@@ -679,12 +660,10 @@
             <div class="made-by">CREATED BY S3LF</div>
         </footer>
     </div>
-
-    <!-- Right Click Popup -->
+    <!-- Right Click Popup (only shows on desktop) -->
     <div id="book-slot-popup" onclick="window.open('https://t.me/unreeves', '_blank')">
         Book your slot now!
     </div>
-
     <!-- Music -->
     <div class="music-toggle" id="music-toggle">♪ MUSIC ON</div>
     <div id="music-visualizer">
@@ -696,28 +675,12 @@
     </audio>
 
     <script>
-        // ==================== REVIEWS ====================
+        // REVIEWS
         const reviews = [
-            {
-                pfp: "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdW5xYmd5YmJjYzdza29id3h5Z29iaHBvbDNzNzA2YjltZXJ1dnJpdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GAFd7zecFb6Ss/giphy.gif",
-                user: "@skibidi2881",
-                text: "can’t complain tbh, pretty smooth overall"
-            },
-            {
-                pfp: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3Z1bGVibjVnMWtmaHU2NzdjZjV2cGsxdjJzcnJhN2t2NW9hdjcwdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ThmsH4FIOj0QGNdGlJ/giphy.gif",
-                user: "@provokes0",
-                text: "quick and no complications 10/10"
-            },
-            {
-                pfp: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzQwMXowYTh1c2Vkd3pxaTRxamJlczY3YWgxeWM4N3RxeHVweWZwbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/0FgmQkpfW3Oa2PYpjy/giphy.gif",
-                user: "@s3pration",
-                text: "straight to the point, no bs"
-            },
-            {
-                pfp: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTJzN3plZnNhd3l1YmozNmdyajh5YTlsbzRwOTFpN3BoN3I4YWsxYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/m9Ul6yHxpyq8YWKOib/giphy.gif",
-                user: "@socialexppp_",
-                text: "💀 actually wild"
-            }
+            { pfp: "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdW5xYmd5YmJjYzdza29id3h5Z29iaHBvbDNzNzA2YjltZXJ1dnJpdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GAFd7zecFb6Ss/giphy.gif", user: "@skibidi2881", text: "can’t complain tbh, pretty smooth overall" },
+            { pfp: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3Z1bGVibjVnMWtmaHU2NzdjZjV2cGsxdjJzcnJhN2t2NW9hdjcwdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ThmsH4FIOj0QGNdGlJ/giphy.gif", user: "@provokes0", text: "quick and no complications 10/10" },
+            { pfp: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzQwMXowYTh1c2Vkd3pxaTRxamJlczY3YWgxeWM4N3RxeHVweWZwbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/0FgmQkpfW3Oa2PYpjy/giphy.gif", user: "@s3pration", text: "straight to the point, no bs" },
+            { pfp: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTJzN3plZnNhd3l1YmozNmdyajh5YTlsbzRwOTFpN3BoN3I4YWsxYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/m9Ul6yHxpyq8YWKOib/giphy.gif", user: "@socialexppp_", text: "💀 actually wild" }
         ];
 
         function initReviews() {
@@ -748,9 +711,10 @@
             }, 4800);
         }
 
-        // ==================== ULTRA SMOOTH ROTATING CARDS ====================
+        // IMPROVED MORE SERVICES CARDS (Desktop rotation + Mobile highlight)
         function initUltraAppleCards() {
             const cards = document.querySelectorAll('.more-card');
+            const grid = document.getElementById('more-grid');
             let index = 1;
 
             function updateCards() {
@@ -763,16 +727,23 @@
                         if (pos === 2) card.classList.add('right');
                     });
                 } else {
-                    const grid = document.getElementById('more-grid');
-                    const scrollCenter = grid.scrollLeft + grid.clientWidth / 2;
+                    const scrollCenter = grid.scrollLeft + (grid.clientWidth / 2);
+                    let closestCard = null;
+                    let minDistance = Infinity;
+
                     cards.forEach(card => {
-                        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-                        if (Math.abs(scrollCenter - cardCenter) < 140) {
-                            card.classList.add('active');
-                        } else {
-                            card.classList.remove('active');
+                        const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+                        const distance = Math.abs(scrollCenter - cardCenter);
+                        card.classList.remove('active');
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            closestCard = card;
                         }
                     });
+
+                    if (closestCard && minDistance < 220) {
+                        closestCard.classList.add('active');
+                    }
                 }
             }
 
@@ -786,16 +757,41 @@
                 }, 600);
             }
 
-            const grid = document.getElementById('more-grid');
+            let scrollTimeout;
             grid.addEventListener('scroll', () => {
-                if (window.innerWidth < 768) updateCards();
+                if (window.innerWidth < 768) {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(updateCards, 16);
+                }
             }, { passive: true });
 
-            setTimeout(updateCards, 300);
-            window.addEventListener('resize', updateCards);
+            grid.addEventListener('touchend', () => {
+                if (window.innerWidth < 768) setTimeout(updateCards, 80);
+            }, { passive: true });
+
+            setTimeout(() => {
+                updateCards();
+                setTimeout(updateCards, 400);
+                setTimeout(updateCards, 900);
+            }, 300);
+
+            window.addEventListener('resize', () => setTimeout(updateCards, 120));
         }
 
-        // ==================== GAME LOGIC ====================
+        // DISABLE RIGHT-CLICK POPUP ON MOBILE
+        function disableRightClickOnMobile() {
+            const isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+            if (isMobile) {
+                document.body.oncontextmenu = null;
+            } else {
+                document.body.oncontextmenu = function(e) {
+                    showBookSlot(e);
+                    return false;
+                };
+            }
+        }
+
+        // GAME LOGIC (unchanged)
         const canvas = document.getElementById("game");
         const ctx = canvas.getContext("2d");
         const scoreEl = document.getElementById("score");
@@ -934,6 +930,7 @@
                 o.x -= SPEED * delta;
                 drawCactus(o);
             }
+
             nextSpawnX -= SPEED * delta;
             spawnIfNeeded();
             obstacles = obstacles.filter(o => o.x > -50);
@@ -968,7 +965,7 @@
         }
         window.addEventListener("scroll", revealOnScroll);
 
-        // Popup
+        // Book Slot Popup (Desktop only)
         const popup = document.getElementById('book-slot-popup');
         let popupTimeout;
         function showBookSlot(e) {
@@ -982,14 +979,6 @@
             popup.classList.add('show');
             popupTimeout = setTimeout(() => popup.classList.remove('show'), 3800);
         }
-        let longPressTimer;
-        document.addEventListener('touchstart', (e) => {
-            longPressTimer = setTimeout(() => {
-                const touch = e.touches[0];
-                showBookSlot({ clientX: touch.clientX, clientY: touch.clientY });
-            }, 680);
-        });
-        document.addEventListener('touchend', () => clearTimeout(longPressTimer));
 
         // Music
         const audio = document.getElementById("bg-music");
@@ -1007,8 +996,10 @@
                 }).catch(() => {});
             }
         }
+
         document.addEventListener('click', startMusic, { once: true });
         document.addEventListener('touchstart', startMusic, { once: true });
+
         toggleBtn.addEventListener("click", () => {
             if (isPlaying) {
                 audio.pause();
@@ -1023,7 +1014,7 @@
             isPlaying = !isPlaying;
         });
 
-        // Initialize Everything
+        // Initialize
         requestAnimationFrame(loop);
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
@@ -1034,8 +1025,9 @@
                     loader.style.display = 'none';
                     siteContent.classList.add('loaded');
                     revealOnScroll();
-                    initUltraAppleCards();   // Smooth rotating cards
+                    initUltraAppleCards();
                     initReviews();
+                    disableRightClickOnMobile();
                 }, 1100);
             }, 650);
         });
